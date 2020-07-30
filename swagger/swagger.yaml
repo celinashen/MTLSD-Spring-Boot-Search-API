@@ -1,0 +1,58 @@
+swagger: "2.0"
+info:
+  version: firstVersion
+  title: search
+schemes:
+  - http
+host: localhost:9180
+paths:
+  /:
+    get:
+      operationId: GetUserdataModel
+      responses: 
+        200:
+          description: Successful
+          schema:
+            $ref: '#/definitions/userdata'
+    post:
+      parameters:
+        - in: body
+          name: userdata
+          schema: 
+            $ref: '#/definitions/userdata'
+      responses:
+        200:
+          description: Successful
+           
+definitions:
+  userdata:
+    type: object
+    description: "userdata"
+    properties: 
+      PK:
+        type: integer
+        description: PK
+      firstName: 
+        type: string
+        description: First Name of the Client
+      lastName:
+        type: string
+        description: Last Name of the Client 
+      dateOfBirth:
+        type: string
+        description: Date of Birth of Client        
+      gender:
+        type: string
+        description: Gender of client, the endpoint of API to retrieve the list of gender options. 
+      City:
+        type: string
+        description: City of the Client's Primary Address
+      referenceNumber:
+        type: string
+        description: Reference Number of Client in EO (CaMS person reference id)
+      postCode:
+        type: string
+        description: postcode
+      concernRoleId:
+        type: integer
+        description: concern role id
