@@ -18,31 +18,6 @@ import org.springframework.stereotype.Repository;
 @Transactional
 public interface UserDataRepository extends JpaRepository<UserData, Long>, CrudRepository<UserData, Long>, JpaSpecificationExecutor<UserData>{
 
-
-    List<UserData> findByFirstName(String firstName);
-
-    //List<UserData> findAll(Specification<UserData> specification);
-
     List<UserData> findAll();
-
     
-   
-    
-    /**
-    Specification<UserData> specification = Specification
-        .where(firstName == null ? null : firstNameContains(firstName))
-        .and(lastName == null ? null : lastNameContains(lastName));
-*/
-
-//	List<UserData> getSome(String firstName);
-
- 
-
-   // Object findOne(String firstName);
-    
-   // List<UserData> findByFirst_name(String first_name);
-
-
-    
-
 }
