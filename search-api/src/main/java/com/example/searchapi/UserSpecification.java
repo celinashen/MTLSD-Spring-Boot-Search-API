@@ -39,17 +39,12 @@ public class UserSpecification implements UserService{
             @Override
             public Predicate toPredicate(Root<UserData> root, CriteriaQuery<?> query, CriteriaBuilder criteriaBuilder) {
                 List<Predicate> predicates = new ArrayList<>();
-                if(firstName!=null) { //do we need and or or requirements
-                    //predicates.add(criteriaBuilder.and(criteriaBuilder.equal(root.get("firstName"), firstName)));
+                if(firstName!=null) { 
                     predicates.add(criteriaBuilder.and(criteriaBuilder.like(root.get("firstName"), "%"+firstName+"%")));
-                    //return criteriaBuilder.and(predicates.toArray(new Predicate[predicates.size()]));
                 }
                 if(lastName!=null) {
                     predicates.add(criteriaBuilder.and(criteriaBuilder.like(root.get("lastName"), "%"+lastName+"%")));
                 }             
-             /**   if(empl!=null){
-                    predicates.add(criteriaBuilder.and(criteriaBuilder.equal(root.get("employeeRole"), employeeRole)));
-                }*/
                 return criteriaBuilder.and(predicates.toArray(new Predicate[predicates.size()]));
             }
         });
@@ -70,7 +65,7 @@ public class UserSpecification implements UserService{
 
                 List<Predicate> predicates = new ArrayList<>();
 
-                if(firstName!=null) { //do we need and or or requirements
+                if(firstName!=null) { 
                     predicates.add(criteriaBuilder.and(criteriaBuilder.like(root.get("firstName"), "%"+firstName+"%")));
                 }
                 if(lastName!=null) {
@@ -79,10 +74,7 @@ public class UserSpecification implements UserService{
                 if(refNumber!=null) {
                     predicates.add(criteriaBuilder.and(criteriaBuilder.equal(root.get("refNumber"), refNumber)));
                 }         
-                if(dateOfBirth!=null) { //is user input going to be formatted? //is date in range?
-                   // predicates.add(criteriaBuilder.and(criteriaBuilder.like(root.get("dateOfBirth"), dateOfBirth)));
-                //   predicates.add(criteriaBuilder.lessThanOrEqualTo(root.<Date>get("dateOfBirth"), dateOfBirth));
-                
+                if(dateOfBirth!=null) { 
                    Predicate onStart = criteriaBuilder.greaterThanOrEqualTo(root.get("startDate"), dateOfBirth);
                    Predicate onEnd = criteriaBuilder.lessThanOrEqualTo(root.get("endDate"), dateOfBirth);
                    predicates.add(onStart);
@@ -101,33 +93,10 @@ public class UserSpecification implements UserService{
                 return criteriaBuilder.and(predicates.toArray(new Predicate[predicates.size()]));
             }
         });
-
-
-
     }
-
-
-
 }
 
  
-            
-    
-
-
-
-    //Construct Query
- /**   public static Specification<UserData> firstNameContains(String firstName) {
-        if (firstName == null){
-            return null;
-        }
-        else{
-            return null;
-        //   return (root, query, builder) -> builder.equal(root.get("first_name"), firstName);
-        }  
-    }*/
-    
-
 
     
 
