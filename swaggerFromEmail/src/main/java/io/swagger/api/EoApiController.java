@@ -42,19 +42,29 @@ public class EoApiController implements EoApi {
         this.objectMapper = objectMapper;
         this.request = request;
     }
-
+    //added request mapping line
     @RequestMapping(value="/test", method={RequestMethod.POST, RequestMethod.GET})
-    public ResponseEntity<ClientSearchResponse> searchClient(@ApiParam(value = "" ,required=true) @RequestHeader(value="Ocp-Apim-Subscr", required=true) String ocpApimSubscr
-,@ApiParam(value = "test1" ,required=true) @RequestHeader(value="organizationId", required=true) String organizationId
+    public ResponseEntity<ClientSearchResponse> searchClient(@ApiParam(value = "", required=true) @RequestHeader(value="Ocp-Apim-Subscr", required=true) String ocpApimSubscr
+,@ApiParam(value = "" ,required=true) @RequestHeader(value="organizationId", required=true) String organizationId
 ,@ApiParam(value = "search client payload" ,required=true )  @Valid @RequestBody ClientSearchRequest body
-,@ApiParam(value = "test2" ) @RequestHeader(value="organizationSiteId", required=false) String organizationSiteId
-,@ApiParam(value = "test3" ) @RequestHeader(value="userId", required=false) String userId
-,@ApiParam(value = "test4" ) @RequestHeader(value="transactionDateTime", required=false) OffsetDateTime transactionDateTime
-,@ApiParam(value = "test5" ) @RequestHeader(value="transactionId", required=false) String transactionId
-,@ApiParam(value = "test6" , allowableValues="en, fr", defaultValue="en") @RequestHeader(value="language", required=false) String language
-) {     
+,@ApiParam(value = "" ) @RequestHeader(value="organizationSiteId", required=false) String organizationSiteId
+,@ApiParam(value = "" ) @RequestHeader(value="userId", required=false) String userId
+,@ApiParam(value = "" ) @RequestHeader(value="transactionDateTime", required=false) OffsetDateTime transactionDateTime
+, @ApiParam(value = "" ) @RequestHeader(value="transactionId", required=false) String transactionId
+,@ApiParam(value = "" , allowableValues="en, fr", defaultValue="en") @RequestHeader(value="language", required=false) String language
+) {    
         String accept = request.getHeader("Accept");
-        System.out.println("template"); 
+        /*if(accept != null){
+            System.out.println(accept); 
+        }*/
+        System.out.println(ocpApimSubscr);
+        System.out.println(organizationId);
+        System.out.println(body);
+        System.out.println(organizationSiteId);
+        System.out.println(userId);
+        System.out.println(transactionDateTime);
+        System.out.println(transactionId);
+        System.out.println(language);
         if (accept != null && accept.contains("application/json")) {
              try {
                 return new ResponseEntity<ClientSearchResponse>(objectMapper.readValue("{\n  \"commonResponse\" : {\n    \"resultInd\" : true,\n    \"message\" : \"message\"\n  },\n  \"clientSearchResultDetails\" : [ {\n    \"firstName\" : \"firstName\",\n    \"lastName\" : \"lastName\",\n    \"referenceNumber\" : \"referenceNumber\",\n    \"city\" : \"city\",\n    \"postalCode\" : \"postalCode\",\n    \"dateOfBirth\" : \"2000-01-23\"\n  }, {\n    \"firstName\" : \"firstName\",\n    \"lastName\" : \"lastName\",\n    \"referenceNumber\" : \"referenceNumber\",\n    \"city\" : \"city\",\n    \"postalCode\" : \"postalCode\",\n    \"dateOfBirth\" : \"2000-01-23\"\n  } ]\n}", ClientSearchResponse.class), HttpStatus.NOT_IMPLEMENTED);
@@ -66,5 +76,4 @@ public class EoApiController implements EoApi {
 
         return new ResponseEntity<ClientSearchResponse>(HttpStatus.NOT_IMPLEMENTED);
     }
-
 }
