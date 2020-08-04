@@ -41,7 +41,7 @@ public interface EoApi {
         produces = { "application/json" }, 
         consumes = { "application/json" },
         method = RequestMethod.POST)
-    ResponseEntity<ClientSearchResponse> searchClient(@ApiParam(value = "" ,required=true) @RequestHeader(value="Ocp-Apim-Subscr", required=true) String ocpApimSubscr
+    ResponseEntity<ClientSearchResponse> searchClient(@ApiParam(value = "", required=true) @RequestHeader(value="Ocp-Apim-Subscr", required=true) String ocpApimSubscr
 ,@ApiParam(value = "" ,required=true) @RequestHeader(value="organizationId", required=true) String organizationId
 ,@ApiParam(value = "search client payload" ,required=true )  @Valid @RequestBody ClientSearchRequest body
 ,@ApiParam(value = "" ) @RequestHeader(value="organizationSiteId", required=false) String organizationSiteId
