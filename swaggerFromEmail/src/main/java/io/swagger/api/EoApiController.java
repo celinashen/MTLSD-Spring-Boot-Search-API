@@ -2,11 +2,16 @@ package io.swagger.api;
 
 import io.swagger.model.ClientSearchRequest;
 import io.swagger.model.ClientSearchResponse;
-import org.threeten.bp.OffsetDateTime;
+import java.time.OffsetDateTime;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.swagger.annotations.*;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -20,22 +25,25 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.multipart.MultipartFile;
-
+import io.swagger.configuration.CustomInstantDeserializer;
 import javax.validation.constraints.*;
 import javax.validation.Valid;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Map;
 @javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2020-07-30T14:37:36.288Z[GMT]")
 @Controller
 public class EoApiController implements EoApi {
-
+    
     private static final Logger log = LoggerFactory.getLogger(EoApiController.class);
 
     private final ObjectMapper objectMapper;
 
     private final HttpServletRequest request;
+
 
     @org.springframework.beans.factory.annotation.Autowired
     public EoApiController(ObjectMapper objectMapper, HttpServletRequest request) {
@@ -43,20 +51,17 @@ public class EoApiController implements EoApi {
         this.request = request;
     }
     //added request mapping line
-    @RequestMapping(value="/test", method={RequestMethod.POST, RequestMethod.GET})
+    @RequestMapping(value="/eo/clients/search", method={RequestMethod.POST, RequestMethod.GET})
     public ResponseEntity<ClientSearchResponse> searchClient(@ApiParam(value = "", required=true) @RequestHeader(value="Ocp-Apim-Subscr", required=true) String ocpApimSubscr
 ,@ApiParam(value = "" ,required=true) @RequestHeader(value="organizationId", required=true) String organizationId
 ,@ApiParam(value = "search client payload" ,required=true )  @Valid @RequestBody ClientSearchRequest body
 ,@ApiParam(value = "" ) @RequestHeader(value="organizationSiteId", required=false) String organizationSiteId
 ,@ApiParam(value = "" ) @RequestHeader(value="userId", required=false) String userId
-,@ApiParam(value = "" ) @RequestHeader(value="transactionDateTime", required=false) OffsetDateTime transactionDateTime
+,@ApiParam(value = "" ) @RequestHeader(value="transactionDateTime", required=false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) OffsetDateTime transactionDateTime 
 , @ApiParam(value = "" ) @RequestHeader(value="transactionId", required=false) String transactionId
 ,@ApiParam(value = "" , allowableValues="en, fr", defaultValue="en") @RequestHeader(value="language", required=false) String language
 ) {    
         String accept = request.getHeader("Accept");
-        /*if(accept != null){
-            System.out.println(accept); 
-        }*/
         System.out.println(ocpApimSubscr);
         System.out.println(organizationId);
         System.out.println(body);

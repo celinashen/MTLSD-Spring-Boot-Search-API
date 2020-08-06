@@ -1,5 +1,6 @@
 package io.swagger;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.ExitCodeGenerator;
 import org.springframework.boot.SpringApplication;
@@ -20,6 +21,7 @@ public class Swagger2SpringBoot implements CommandLineRunner {
             throw new ExitException();
         }
     }
+    
 
     public static void main(String[] args) throws Exception {
         new SpringApplication(Swagger2SpringBoot.class).run(args);

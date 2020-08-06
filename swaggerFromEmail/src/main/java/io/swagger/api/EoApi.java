@@ -7,8 +7,10 @@ package io.swagger.api;
 
 import io.swagger.model.ClientSearchRequest;
 import io.swagger.model.ClientSearchResponse;
-import org.threeten.bp.OffsetDateTime;
+import java.time.OffsetDateTime;
 import io.swagger.annotations.*;
+
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -23,12 +25,15 @@ import org.springframework.web.bind.annotation.CookieValue;
 
 import javax.validation.Valid;
 import javax.validation.constraints.*;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
 @javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2020-07-30T14:37:36.288Z[GMT]")
 @Api(value = "eo", description = "the eo API")
 public interface EoApi {
-
     @ApiOperation(value = "", nickname = "searchClient", notes = "", response = ClientSearchResponse.class, authorizations = {
         @Authorization(value = "bearerAuth")    }, tags={  })
     @ApiResponses(value = { 
@@ -46,10 +51,9 @@ public interface EoApi {
 ,@ApiParam(value = "search client payload" ,required=true )  @Valid @RequestBody ClientSearchRequest body
 ,@ApiParam(value = "" ) @RequestHeader(value="organizationSiteId", required=false) String organizationSiteId
 ,@ApiParam(value = "" ) @RequestHeader(value="userId", required=false) String userId
-,@ApiParam(value = "" ) @RequestHeader(value="transactionDateTime", required=false) OffsetDateTime transactionDateTime
+,@ApiParam(value = "" ) @RequestHeader(value="transactionDateTime", required=false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) OffsetDateTime transactionDateTime
 ,@ApiParam(value = "" ) @RequestHeader(value="transactionId", required=false) String transactionId
 ,@ApiParam(value = "" , allowableValues="en, fr", defaultValue="en") @RequestHeader(value="language", required=false) String language
 );
 
 }
-
