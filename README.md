@@ -1,5 +1,7 @@
 #APIv4ToGithub
+
 Tips for using APIv4ToGithub:
+
 *Extract the folder
 *Go to applications.properties file located in "src\main\resources" folder
 *Change the placeholders according to the information of your database 
